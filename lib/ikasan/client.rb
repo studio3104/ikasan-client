@@ -11,20 +11,12 @@ module Ikasan
       @ca_file = ca_file
     end
 
-    def notice(channel, message)
-      http_post_request('notice', channel: channel, message: message)
+    def notice(channel, message, color: nil, message_format: nil)
+      http_post_request('notice', channel: channel, message: message, color: color, message_format: message_format)
     end
 
-    def privmsg(channel, message)
-      http_post_request('privmsg', channel: channel, message: message)
-    end
-
-    def join(channel, channel_keyword: nil) # channel_keyword: channel password
-      http_post_request('join', channel: channel, channel_keyword: channel_keyword)
-    end
-
-    def leave(channel)
-      http_post_request('leave', channel: channel)
+    def privmsg(channel, message, color: nil, message_format: nil)
+      http_post_request('privmsg', channel: channel, message: message, color: color, message_format: message_format)
     end
 
     private

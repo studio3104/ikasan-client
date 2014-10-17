@@ -6,29 +6,60 @@ describe Ikasan::Client do
   let(:base_url) { "http://#{host}:#{port}" }
   let(:channel) { '#test' }
   let(:message) { 'test message' }
+  let(:color) { 'random' }
+  let(:message_format) { 'html' }
   let(:client) { Ikasan::Client.new(host, port) }
+  let(:base_stub_params) { { channel: channel, message: message, color: nil, message_format: nil } }
 
-  it 'notice' do
-    stub_request(:post, base_url + '/notice').with(body: URI.encode_www_form(channel: channel, message: message))
-    response = client.notice(channel, message)
-    expect(response.code.to_i).to eq(200)
+  describe 'POST /notice' do
+    it 'basic' do
+      stub_request(:post, base_url + '/notice').with(body: URI.encode_www_form(base_stub_params))
+      response = client.notice(channel, message)
+      expect(response.code.to_i).to eq(200)
+    end
+    it 'specify color' do
+      stub_params = base_stub_params.merge(color: color)
+      stub_request(:post, base_url + '/notice').with(body: URI.encode_www_form(stub_params))
+      response = client.notice(channel, message, color: color)
+      expect(response.code.to_i).to eq(200)
+    end
+    it 'specify message_format' do
+      stub_params = base_stub_params.merge(message_format: message_format)
+      stub_request(:post, base_url + '/notice').with(body: URI.encode_www_form(stub_params))
+      response = client.notice(channel, message, message_format: message_format)
+      expect(response.code.to_i).to eq(200)
+    end
+    it 'specify color and message_format' do
+      stub_params = base_stub_params.merge(color: color, message_format: message_format)
+      stub_request(:post, base_url + '/notice').with(body: URI.encode_www_form(stub_params))
+      response = client.notice(channel, message, color: color, message_format: message_format)
+      expect(response.code.to_i).to eq(200)
+    end
   end
 
-  it 'privmsg' do
-    stub_request(:post, base_url + '/privmsg').with(body: URI.encode_www_form(channel: channel, message: message))
-    response = client.privmsg(channel, message)
-    expect(response.code.to_i).to eq(200)
-  end
-
-  it 'join' do
-    stub_request(:post, base_url + '/join').with(body: URI.encode_www_form(channel: channel, channel_keyword: nil))
-    response = client.join(channel)
-    expect(response.code.to_i).to eq(200)
-  end
-
-  it 'leave' do
-    stub_request(:post, base_url + '/leave').with(body: URI.encode_www_form(channel: channel))
-    response = client.leave(channel)
-    expect(response.code.to_i).to eq(200)
+  describe 'POST /privmsg' do
+    it 'basic' do
+      stub_request(:post, base_url + '/privmsg').with(body: URI.encode_www_form(base_stub_params))
+      response = client.privmsg(channel, message)
+      expect(response.code.to_i).to eq(200)
+    end
+    it 'specify color' do
+      stub_params = base_stub_params.merge(color: color)
+      stub_request(:post, base_url + '/privmsg').with(body: URI.encode_www_form(stub_params))
+      response = client.privmsg(channel, message, color: color)
+      expect(response.code.to_i).to eq(200)
+    end
+    it 'specify message_format' do
+      stub_params = base_stub_params.merge(message_format: message_format)
+      stub_request(:post, base_url + '/privmsg').with(body: URI.encode_www_form(stub_params))
+      response = client.privmsg(channel, message, message_format: message_format)
+      expect(response.code.to_i).to eq(200)
+    end
+    it 'specify color and message_format' do
+      stub_params = base_stub_params.merge(color: color, message_format: message_format)
+      stub_request(:post, base_url + '/privmsg').with(body: URI.encode_www_form(stub_params))
+      response = client.privmsg(channel, message, color: color, message_format: message_format)
+      expect(response.code.to_i).to eq(200)
+    end
   end
 end
