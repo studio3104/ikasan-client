@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe Ikachan::Client do
-  let(:host) { 'test.ikachan.com' }
+describe Ikasan::Client do
+  let(:host) { 'test.ikasan.com' }
   let(:port) { 80 }
   let(:base_url) { "http://#{host}:#{port}" }
   let(:channel) { '#test' }
   let(:message) { 'test message' }
-  let(:client) { Ikachan::Client.new(host, port) }
+  let(:client) { Ikasan::Client.new(host, port) }
 
   it 'notice' do
     stub_request(:post, base_url + '/notice').with(body: URI.encode_www_form(channel: channel, message: message))

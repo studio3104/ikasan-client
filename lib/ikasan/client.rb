@@ -1,7 +1,7 @@
 require 'uri'
 require 'net/https'
 
-module Ikachan
+module Ikasan
   class Client
     def initialize(host, port = 4979, ssl: false, verify_ssl: false, ca_file: nil)
       @host = host
