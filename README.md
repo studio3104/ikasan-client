@@ -1,78 +1,57 @@
-# Ikachan::Client [![Build Status](https://travis-ci.org/studio3104/ikachan-client.png)](https://travis-ci.org/studio3104/ikachan-client)
+# ikasan::Client [![Build Status](https://travis-ci.org/studio3104/ikasan-client.png)](https://travis-ci.org/studio3104/ikasan-client)
 
-post message to irc http gateway `ikachan`.
+post message to HipChat http gateway `ikasan`.
 
-see: https://metacpan.org/module/ikachan
-
-see: http://blog.yappo.jp/yappo/archives/000760.html (Japanese)
+see: https://github.com/studio3104/ikasan
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'ikachan-client'
+    gem 'ikasan-client', github: 'studio3104/ikasan-client'
 
 And then execute:
 
     $ bundle
-
-Or install it yourself as:
-
-    $ gem install ikachan-client
 
 ## Usage
 
 #### Expamples
 
 ```ruby
-require 'ikachan/client'
+require 'ikasan/client'
 
-# ikachan server: http://localhost:4979
-ikachan = Ikachan::Client.new('localhost')
+# ikasan server: http://localhost:4979
+ikasan = ikasan::Client.new('localhost')
 
-# ikachan server: http://localhost
-ikachan = Ikachan::Client.new('localhost', 80)
+# ikasan server: http://localhost
+ikasan = ikasan::Client.new('localhost', 80)
 
 # use https, and not verify certificate
-ikachan = Ikachan::Client.new('localhost', ssl: true)
+ikasan = ikasan::Client.new('localhost', ssl: true)
 
 # use https, and verify default certificate
-ikachan = Ikachan::Client.new('localhost', ssl: true, verify_ssl: true)
+ikasan = ikasan::Client.new('localhost', ssl: true, verify_ssl: true)
 
 # use https, and verify specified certificate
-ikachan = Ikachan::Client.new('localhost', ssl: true, verify_ssl: true, ca_file: '/path/to/ca_file')
+ikasan = ikasan::Client.new('localhost', ssl: true, verify_ssl: true, ca_file: '/path/to/ca_file')
 ```
 
 ###### send NOTICE
 
 ```ruby
-ikachan.notice('#channel', 'message')
+ikasan.notice('#channel', 'message', color: 'random', message_format: 'text')
 ```
 
 ###### send PRIVMSG
 
 ```ruby
-ikachan.privmsg('#chennel', 'message')
-```
-
-###### JOIN
-
-```ruby
-ikachan.join('#channel')
-
-# authenticate with channel password
-ikachan.join('#channel', channel_keyword: 'channel password')
-```
-
-###### LEAVE
-
-```ruby
-ikachan.leave('#channel')
+ikasan.privmsg('#chennel', 'message', color: 'random', message_format: 'text')
 ```
 
 ## Contributing
 
-1. Fork it ( http://github.com/studio3104/ikachan-client/fork )
+1. Fork it ( http://github.com/studio3104/ikasan-client/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
