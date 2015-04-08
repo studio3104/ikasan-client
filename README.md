@@ -1,4 +1,4 @@
-# ikasan::Client [![Build Status](https://travis-ci.org/studio3104/ikasan-client.png)](https://travis-ci.org/studio3104/ikasan-client)
+# Ikasan::Client [![Build Status](https://travis-ci.org/studio3104/ikasan-client.png)](https://travis-ci.org/studio3104/ikasan-client)
 
 post message to HipChat http gateway `ikasan`.
 
