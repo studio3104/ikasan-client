@@ -22,19 +22,19 @@ And then execute:
 require 'ikasan/client'
 
 # ikasan server: http://localhost:4979
-ikasan = ikasan::Client.new('localhost')
+ikasan = Ikasan::Client.new('localhost')
 
 # ikasan server: http://localhost
-ikasan = ikasan::Client.new('localhost', 80)
+ikasan = Ikasan::Client.new('localhost', 80)
 
 # use https, and not verify certificate
-ikasan = ikasan::Client.new('localhost', ssl: true)
+ikasan = Ikasan::Client.new('localhost', ssl: true)
 
 # use https, and verify default certificate
-ikasan = ikasan::Client.new('localhost', ssl: true, verify_ssl: true)
+ikasan = Ikasan::Client.new('localhost', ssl: true, verify_ssl: true)
 
 # use https, and verify specified certificate
-ikasan = ikasan::Client.new('localhost', ssl: true, verify_ssl: true, ca_file: '/path/to/ca_file')
+ikasan = Ikasan::Client.new('localhost', ssl: true, verify_ssl: true, ca_file: '/path/to/ca_file')
 ```
 
 ###### send NOTICE
