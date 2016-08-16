@@ -6,15 +6,22 @@ describe Ikasan::Client do
   let(:base_url) { "http://#{host}:#{port}" }
   let(:channel) { '#test' }
   let(:message) { 'test message' }
+  let(:nickname) { 'ikasan' }
   let(:color) { 'random' }
   let(:message_format) { 'html' }
   let(:client) { Ikasan::Client.new(host, port) }
-  let(:base_stub_params) { { channel: channel, message: message, color: nil, message_format: nil } }
+  let(:base_stub_params) { { channel: channel, message: message, nickname: nil, color: nil, message_format: nil } }
 
   describe 'POST /notice' do
     it 'basic' do
       stub_request(:post, base_url + '/notice').with(body: URI.encode_www_form(base_stub_params))
       response = client.notice(channel, message)
+      expect(response.code.to_i).to eq(200)
+    end
+    it 'specify nickname' do
+      stub_params = base_stub_params.merge(nickname: nickname)
+      stub_request(:post, base_url + '/notice').with(body: URI.encode_www_form(stub_params))
+      response = client.notice(channel, message, nickname: nickname)
       expect(response.code.to_i).to eq(200)
     end
     it 'specify color' do
@@ -29,10 +36,10 @@ describe Ikasan::Client do
       response = client.notice(channel, message, message_format: message_format)
       expect(response.code.to_i).to eq(200)
     end
-    it 'specify color and message_format' do
-      stub_params = base_stub_params.merge(color: color, message_format: message_format)
+    it 'specify nickname, color and message_format' do
+      stub_params = base_stub_params.merge(nickname: nickname, color: color, message_format: message_format)
       stub_request(:post, base_url + '/notice').with(body: URI.encode_www_form(stub_params))
-      response = client.notice(channel, message, color: color, message_format: message_format)
+      response = client.notice(channel, message, nickname: nickname, color: color, message_format: message_format)
       expect(response.code.to_i).to eq(200)
     end
   end
@@ -41,6 +48,12 @@ describe Ikasan::Client do
     it 'basic' do
       stub_request(:post, base_url + '/privmsg').with(body: URI.encode_www_form(base_stub_params))
       response = client.privmsg(channel, message)
+      expect(response.code.to_i).to eq(200)
+    end
+    it 'specify nickname' do
+      stub_params = base_stub_params.merge(nickname: nickname)
+      stub_request(:post, base_url + '/privmsg').with(body: URI.encode_www_form(stub_params))
+      response = client.privmsg(channel, message, nickname: nickname)
       expect(response.code.to_i).to eq(200)
     end
     it 'specify color' do
@@ -55,10 +68,10 @@ describe Ikasan::Client do
       response = client.privmsg(channel, message, message_format: message_format)
       expect(response.code.to_i).to eq(200)
     end
-    it 'specify color and message_format' do
-      stub_params = base_stub_params.merge(color: color, message_format: message_format)
+    it 'specify nickname, color and message_format' do
+      stub_params = base_stub_params.merge(nickname: nickname, color: color, message_format: message_format)
       stub_request(:post, base_url + '/privmsg').with(body: URI.encode_www_form(stub_params))
-      response = client.privmsg(channel, message, color: color, message_format: message_format)
+      response = client.privmsg(channel, message, nickname: nickname, color: color, message_format: message_format)
       expect(response.code.to_i).to eq(200)
     end
   end
